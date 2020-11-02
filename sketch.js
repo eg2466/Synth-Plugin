@@ -6,6 +6,12 @@ const options = { probabilityThreshold: 0.8 };
 const play_model = 'models/play/model.json'
 const pause_model = 'models/pause/model.json'
 
+
+
+
+const plucky = new Tone.Synth().toDestination();
+const now = Tone.now()
+
 let classifier;
 let play_classifier;
 let pause_classifier;
@@ -19,13 +25,15 @@ function preload() {
     classifier = ml5.soundClassifier('SpeechCommands18w', options, modelReady);
     play_classifier = ml5.soundClassifier(play_model);
     pause_classifier = ml5.soundClassifier(pause_model);
+    
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+    background(255);
     
+create_piano();
 }
-
 
 
 function modelReady() {
@@ -33,6 +41,24 @@ function modelReady() {
   classifier.classify(gotResult);
 //    play_classifier.classify(gotResult);
 //    pause_classifier.classify(gotResult);
+}
+
+
+
+
+
+
+
+function keyPressed() {
+  if (keyCode === 65) {
+    plucky.triggerAttackRelease("C4", "2", now);
+    plucky.triggerRelease();
+      print("pressed a");
+  } else if (keyCode === 83) {
+    plucky.triggerAttackRelease("D4", "2", now);
+    plucky.triggerRelease();
+      print("pressed s");
+  }
 }
 
 
@@ -57,9 +83,12 @@ function gotResult(error, result) {
 
 
 
-
 function draw() {
-  background(220, 0, 0);
+//    create_piano();
+//    create_piano();
+    
+
+    
     
     if (spoken_word) {
         print("label: " + spoken_word);
@@ -72,4 +101,6 @@ function draw() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+//    background(255);
+//    create_piano();
 }

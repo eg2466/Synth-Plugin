@@ -5,3 +5,33 @@ html, body {
 canvas {
   display: block;
 }
+
+
+#white-btn{
+/*    background-color: #c65052 ;*/
+    background-color: #EDEDED ;
+    color: #000000;
+    border: 2px solid #ffffff;
+    padding-top: 70px;
+    width: 60px;
+    height: 140px;
+    border-radius: 4px;
+/*    transition-duration: 0.3s;*/
+}
+
+#blk-btn{
+/*    background-color: #c65052 ;*/
+    background-color: #000000 ;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    width: 40px;
+    height: 80px;
+    border-radius: 4px;
+/*    transition-duration: 0.3s;*/
+}
+
+/*
+#white-btn:hover{
+    background-color: #823334;
+  color: white;
+}*/
