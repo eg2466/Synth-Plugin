@@ -230,16 +230,50 @@ function gotResult(error, result) {
 
 ///////////////////// PLAY PIANO USING KEYBOARD FUNCTION ////////////////////
 function keyPressed() {
+    
   if (keyCode === 65) {
-    synth_tone.triggerAttack("C4", "2", now);
+    synth_tone.triggerAttack("C"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
-      print("pressed a");
+  }if (keyCode === 87) {
+    synth_tone.triggerAttack("C#"+str(key_val.value()), "4n", now);
+    synth_tone.triggerRelease();
   }if (keyCode === 83) {
-    synth_tone.triggerAttack("D4", "2", now);
+    synth_tone.triggerAttack("D"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
-      print("pressed s");
+  }if (keyCode === 69) {
+    synth_tone.triggerAttack("D#"+str(key_val.value()), "4n", now);
+    synth_tone.triggerRelease();
+  }if (keyCode === 68) {
+    synth_tone.triggerAttack("E"+str(key_val.value()), "4n", now);
+    synth_tone.triggerRelease();
+  }if (keyCode === 70) {
+    synth_tone.triggerAttack("F"+str(key_val.value()), "4n", now);
+    synth_tone.triggerRelease();
+  }if (keyCode === 84) {
+    synth_tone.triggerAttack("F#"+str(key_val.value()), "4n", now);
+    synth_tone.triggerRelease();
+  }if (keyCode === 71) {
+    synth_tone.triggerAttack("G"+str(key_val.value()), "4n", now);
+    synth_tone.triggerRelease();
+  }if (keyCode === 89) {
+    synth_tone.triggerAttack("G#"+str(key_val.value()), "4n", now);
+    synth_tone.triggerRelease();
+  }if (keyCode === 72) {
+    synth_tone.triggerAttack("A"+str(key_val.value()), "4n", now);
+    synth_tone.triggerRelease();
+  }if (keyCode === 85) {
+    synth_tone.triggerAttack("A#"+str(key_val.value()), "4n", now);
+    synth_tone.triggerRelease();
+  }if (keyCode === 74) {
+    synth_tone.triggerAttack("B"+str(key_val.value()), "4n", now);
+    synth_tone.triggerRelease();
+  }if (keyCode === 75) {
+    synth_tone.triggerAttack("C"+str(int(key_val.value()) + 1), "4n", now);
+    synth_tone.triggerRelease();
   }
+    
 }
+
 
 
 

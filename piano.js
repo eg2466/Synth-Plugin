@@ -96,75 +96,75 @@ function create_piano() {
 
 
 function c_key(){
-    synth_tone.triggerAttack("C"+str(key_val.value()), "8n", now);
+    synth_tone.triggerAttack("C"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
 //    synth.triggerAttackRelease("C"+str(key_val.value()), "8n");
 }
 
 function c_sharp_key(){
-    synth_tone.triggerAttack("C#"+str(key_val.value()), "8n", now);
+    synth_tone.triggerAttack("C#"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
 }
 
 
 function d_key(){
-    synth_tone.triggerAttack("D"+str(key_val.value()), "8n", now);
+    synth_tone.triggerAttack("D"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
 }
 
 function d_sharp_key(){
-    synth_tone.triggerAttack("D#"+str(key_val.value()), "8n", now);
+    synth_tone.triggerAttack("D#"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
 }
 
 function e_key(){
-    synth_tone.triggerAttack("E"+str(key_val.value()), "8n", now);
+    synth_tone.triggerAttack("E"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
 }
 
 function f_key(){
-    synth_tone.triggerAttack("F"+str(key_val.value()), "8n", now);
+    synth_tone.triggerAttack("F"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
 }
 
 function f_sharp_key(){
-    synth_tone.triggerAttack("F#"+str(key_val.value()), "8n", now);
+    synth_tone.triggerAttack("F#"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
 }
 
 function g_key(){
-    synth_tone.triggerAttack("G"+str(key_val.value()), "8n", now);
+    synth_tone.triggerAttack("G"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
 }
 
 function g_sharp_key(){
-    synth_tone.triggerAttack("G#"+str(key_val.value()), "8n", now);
+    synth_tone.triggerAttack("G#"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
 }
 
 
 function a_key(){
-    synth_tone.triggerAttack("A"+str(key_val.value()), "8n", now);
+    synth_tone.triggerAttack("A"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
 }
 
 
 function a_sharp_key(){
-    synth_tone.triggerAttack("A#"+str(key_val.value()), "8n", now);
+    synth_tone.triggerAttack("A#"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
 }
 
 
 function b_key(){
-    synth_tone.triggerAttack("B"+str(key_val.value()), "8n", now);
+    synth_tone.triggerAttack("B"+str(key_val.value()), "4n", now);
     synth_tone.triggerRelease();
 }
 
 function c2_key(){
 //    c2_val = int(key_val.value()) + 1;
-    synth_tone.triggerAttack("C"+str(int(key_val.value()) + 1), "8n", now);
+    synth_tone.triggerAttack("C"+str(int(key_val.value()) + 1), "4n", now);
     synth_tone.triggerRelease();
-    print("C"+str(int(key_val.value()) + 1));
+//    print("C"+str(int(key_val.value()) + 1));
 }
 
 
