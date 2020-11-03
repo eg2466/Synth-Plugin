@@ -13,10 +13,41 @@ const play_model = 'models/play/model.json'
 const pause_model = 'models/pause/model.json'
 
 
+let gain_synth_val = 10;
+
+//https://tonejs.github.io/docs/14.7.58/PingPongDelay.html
+const synth_pingPong = new Tone.PingPongDelay("4n", 0.2).toDestination();
+
+//ADSR - https://tonejs.github.io/docs/14.7.58/AmplitudeEnvelope
+//const ampEnv = new Tone.AmplitudeEnvelope({
+//		attack: 1,
+//		decay: 2,
+//		sustain: 1.0,
+//		release: 8
+//	}).toDestination();
+
+const synth_reverb = new Tone.Reverb({wet: 1, decay  : 1.5 ,preDelay  : 0.01}).toDestination();
+
+const synth_tone = new Tone.Synth({
+            envelope: {
+				attackCurve: "exponential",
+				attack: 0.05,
+				decay: 0.2,
+				sustain: 0.2,
+				release: 1.5}
+            }).toDestination();
 
 
-const plucky = new Tone.Synth().toDestination();
+
+
+
+
+let loop_metro;
 const now = Tone.now()
+let gainNode = new Tone.Gain(-0.6).toDestination();
+const metro_tone = new Tone.Synth().connect(gainNode).toDestination();
+
+let bpm;
 
 let classifier;
 let play_classifier;
@@ -54,11 +85,24 @@ function setup() {
     createCanvas(1080, 600);
     textSize(15);
     textFont('Gotham Bold');
+    
+//    frameRate(1);
 
     //background(255);
-    Tone.start()
+    Tone.start();
     ADSR();
     create_piano();
+    
+    //looping metronome
+    //https://tonejs.github.io/docs/14.7.58/Loop
+//    loop_metro = new Tone.Loop((time) => {
+//	console.log(time);
+//    synth_tone.triggerAttackRelease("C5", str(bpm));
+//    }, str(bpm)).start();
+//    
+//    //to start metronome
+//    Tone.Transport.start();
+
     
     //radio buttons
     radio_ping_pong_delay = createRadio();
@@ -98,21 +142,53 @@ function setup() {
     
     
     //gain slider
-    gain_val = createSlider(0, 100, 50, 5);
+    gain_val = createSlider(-10, 30, 10, 1);
     gain_val.position(840, 460);
     gain_val.style('width', '100px');
     
     
-    // gain slider
-    metronome_val = createSlider(0, 200, 128, 1);
+    // metronome slider
+    metronome_val = createSlider(0, 200, 120, 1);
     metronome_val.position(840, 510);
     metronome_val.style('width', '100px');
+    
+    bpm = metronome_val.value();
+    
+    
+        loop_metro_80 = new Tone.Loop((time) => {
+        console.log(time);
+        metro_tone.triggerAttack("C5","1");
+        metro_tone.triggerRelease();
+        }, "4n" );
+        
+    
+    synth_tone.volume.value = gain_synth_val;
+    
+    metro(bpm);
+//    print(bpm);  
 
+    
         
 }
 
 
 
+
+function metro(bpm_val){
+
+    Tone.start();
+    
+    if(spoken_word === "go" || spoken_word === "no"){
+        loop_metro_80.start();
+        Tone.Transport.bpm.value = bpm_val;
+        Tone.Transport.start();
+        print("im hererere")
+    }else{
+        loop_metro_80.stop();
+        Tone.Transport.stop();
+    }
+    
+}
 
 
 ///////////////////// MODEL FOR ML5 FUNCTION ////////////////////
@@ -155,12 +231,12 @@ function gotResult(error, result) {
 ///////////////////// PLAY PIANO USING KEYBOARD FUNCTION ////////////////////
 function keyPressed() {
   if (keyCode === 65) {
-    plucky.triggerAttack("C4", "2", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("C4", "2", now);
+    synth_tone.triggerRelease();
       print("pressed a");
   }if (keyCode === 83) {
-    plucky.triggerAttack("D4", "2", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("D4", "2", now);
+    synth_tone.triggerRelease();
       print("pressed s");
   }
 }
@@ -174,10 +250,35 @@ function draw() {
     fill(0);
     textSize(16);
         //key text 
-    text('KEY: ', 790, 425);   
+    text('KEY: ', 790, 425); 
+    
     text('GAIN: ', 780, 475);  
+    textSize(14);
+    text(gain_val.value() + ' dB', 785, 490); 
+    
+    textSize(16);
     text('METRONOME: ', 718, 525);  
-    text(metronome_val.value(), 800, 540); 
+    
+    textSize(10);
+    text('(Say "go" to start)', 720, 540);
+    text('(Say "stop" to stop)', 720, 550);
+    
+    textSize(14);
+    text('STATUS: ', 845, 550);
+    
+    textSize(12);
+    if(spoken_word === "go" || spoken_word === "no"){
+        push();
+            fill(0, 255, 0);
+            text('ACTIVE', 910, 550);
+        pop();
+    }else{
+         push();
+            fill(200, 0, 0);       
+            text('INACTIVE', 910, 550);
+        pop();
+    }
+    
     
     push();
     fill(255);
@@ -192,18 +293,46 @@ function draw() {
     pop();
     
     
+    //ADSR values
+        push();
+    fill(255);
+    textSize(14);
+    text(attack.value(), 135, 553);
+    text(decay.value(), 200, 553);
+    text(sustain.value(), 260, 553);
+    text(release.value(), 320, 553);
     
-//    create_piano();
-//    create_piano();
+    pop();
     
+    
+    bpm = metronome_val.value();
+    metro(bpm);
 
+    gain_synth_val = gain_val.value();
+    synth_tone.volume.value = gain_synth_val;
+    
+    if (radio_reverb.value() === 'REVERB'){
+//        synth_reverb.Q.value = 6;
+        synth_tone.chain(synth_reverb, Tone.Destination);
+        
+//        synth_reverb.start();
+        print("reverb")
+    }
+    if (radio_ping_pong_delay.value() === 'PING PONG DELAY'){
+//        synth_pingPong.wet.value = 1;
+        synth_tone.chain(synth_pingPong, Tone.Destination);
+        print("ping pong")
+    }
+    else{
+        synth_pingPong.disconnect();
+        synth_reverb.disconnect();
+    }
     
     
-//    if (spoken_word) {
-//        print("label: " + spoken_word);
-//        print("confidence: " + spoken_word_conf);
-//    }
     
+    print("release val " + synth_tone.envelope.release);
+    synth_tone.envelope.release = 2;
+    print("release val2 " + synth_tone.envelope.release);
 }
 
 

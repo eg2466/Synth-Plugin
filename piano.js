@@ -96,73 +96,74 @@ function create_piano() {
 
 
 function c_key(){
-    plucky.triggerAttack("C"+str(key_val.value()), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("C"+str(key_val.value()), "8n", now);
+    synth_tone.triggerRelease();
+//    synth.triggerAttackRelease("C"+str(key_val.value()), "8n");
 }
 
 function c_sharp_key(){
-    plucky.triggerAttack("C#"+str(key_val.value()), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("C#"+str(key_val.value()), "8n", now);
+    synth_tone.triggerRelease();
 }
 
 
 function d_key(){
-    plucky.triggerAttack("D"+str(key_val.value()), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("D"+str(key_val.value()), "8n", now);
+    synth_tone.triggerRelease();
 }
 
 function d_sharp_key(){
-    plucky.triggerAttack("D#"+str(key_val.value()), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("D#"+str(key_val.value()), "8n", now);
+    synth_tone.triggerRelease();
 }
 
 function e_key(){
-    plucky.triggerAttack("E"+str(key_val.value()), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("E"+str(key_val.value()), "8n", now);
+    synth_tone.triggerRelease();
 }
 
 function f_key(){
-    plucky.triggerAttack("F"+str(key_val.value()), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("F"+str(key_val.value()), "8n", now);
+    synth_tone.triggerRelease();
 }
 
 function f_sharp_key(){
-    plucky.triggerAttack("F#"+str(key_val.value()), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("F#"+str(key_val.value()), "8n", now);
+    synth_tone.triggerRelease();
 }
 
 function g_key(){
-    plucky.triggerAttack("G"+str(key_val.value()), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("G"+str(key_val.value()), "8n", now);
+    synth_tone.triggerRelease();
 }
 
 function g_sharp_key(){
-    plucky.triggerAttack("G#"+str(key_val.value()), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("G#"+str(key_val.value()), "8n", now);
+    synth_tone.triggerRelease();
 }
 
 
 function a_key(){
-    plucky.triggerAttack("A"+str(key_val.value()), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("A"+str(key_val.value()), "8n", now);
+    synth_tone.triggerRelease();
 }
 
 
 function a_sharp_key(){
-    plucky.triggerAttack("A#"+str(key_val.value()), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("A#"+str(key_val.value()), "8n", now);
+    synth_tone.triggerRelease();
 }
 
 
 function b_key(){
-    plucky.triggerAttack("B"+str(key_val.value()), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("B"+str(key_val.value()), "8n", now);
+    synth_tone.triggerRelease();
 }
 
 function c2_key(){
 //    c2_val = int(key_val.value()) + 1;
-    plucky.triggerAttack("C"+str(int(key_val.value()) + 1), "8n", now);
-    plucky.triggerRelease();
+    synth_tone.triggerAttack("C"+str(int(key_val.value()) + 1), "8n", now);
+    synth_tone.triggerRelease();
     print("C"+str(int(key_val.value()) + 1));
 }
 
