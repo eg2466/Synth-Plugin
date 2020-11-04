@@ -40,8 +40,6 @@ const synth_tone = new Tone.Synth({
 
 
 
-
-
 let loop_metro;
 const now = Tone.now()
 let gainNode = new Tone.Gain(-0.6).toDestination();
@@ -63,6 +61,8 @@ let reverb;
 let key_val;
 
 let metronome_val;
+
+let keyboard_checkbox
 
 
 ///////////////////// PRE LOAD FUNCTION ////////////////////
@@ -93,6 +93,7 @@ function setup() {
     ADSR();
     create_piano();
     
+    
     //looping metronome
     //https://tonejs.github.io/docs/14.7.58/Loop
 //    loop_metro = new Tone.Loop((time) => {
@@ -107,21 +108,21 @@ function setup() {
     //radio buttons
     radio_ping_pong_delay = createRadio();
     radio_ping_pong_delay.option('PING PONG DELAY');
-    radio_ping_pong_delay.position(450, 410);
+    radio_ping_pong_delay.position(775, 490);
     radio_ping_pong_delay.style('width', '200px');
     radio_ping_pong_delay.style('font-family', 'Gotham Bold');
     
     //radio delay buttons
     radio_reverb = createRadio();
     radio_reverb.option('REVERB');
-    radio_reverb.position(450, 460);
+    radio_reverb.position(775, 515);
     radio_reverb.style('width', '200px');
     radio_reverb.style('font-family', 'Gotham Bold');
     
     //radio none button
     radio_none = createRadio();
     radio_none.option('NONE');
-    radio_none.position(450, 510);
+    radio_none.position(775, 540);
     radio_none.style('width', '200px');
     radio_none.style('font-family', 'Gotham Bold');
     
@@ -137,20 +138,25 @@ function setup() {
     key_val.option('7', 7);
     key_val.option('8', 8);
     key_val.selected('4', 4);
-    key_val.position(840, 410);
+    key_val.position(840, 400);
     key_val.style('width', '100px');
     
     
+    //piano keyboard values:
+    keyboard_checkbox = createCheckbox('KEYBOARD SHORTCUT', false);
+//    keyboard_checkbox.changed(show_keyboard);
+    keyboard_checkbox.position(450, 280);
+    
     //gain slider
     gain_val = createSlider(-10, 30, 10, 1);
-    gain_val.position(840, 460);
+    gain_val.position(840, 440);
     gain_val.style('width', '100px');
     
     
     // metronome slider
     metronome_val = createSlider(0, 200, 120, 1);
-    metronome_val.position(840, 510);
-    metronome_val.style('width', '100px');
+    metronome_val.position(540, 400);
+    metronome_val.style('width', '120px');
     
     bpm = metronome_val.value();
     
@@ -167,10 +173,24 @@ function setup() {
     metro(bpm);
 //    print(bpm);  
 
-    
         
 }
 
+
+//function show_keyboard(){
+//    if (keyboard_checkbox.checked()){
+//        push();
+//            fill(0);
+//            text('(a)', 790, 215); 
+//        
+//        pop();
+//        
+//        
+//        
+//    }else{
+//        fill(255);
+//    }
+//}
 
 
 
@@ -284,35 +304,60 @@ function draw() {
     fill(0);
     textSize(16);
         //key text 
-    text('KEY: ', 790, 425); 
+    text('KEY: ', 790, 415); 
     
-    text('GAIN: ', 780, 475);  
+    text('GAIN: ', 780, 455);  
     textSize(14);
-    text(gain_val.value() + ' dB', 785, 490); 
+    text(gain_val.value() + ' dB', 785, 470); 
+    
+    //METRONOME text //////////
+    textSize(16);
+    text('METRONOME: ', 415, 415);  
+    text('BPM:   '+metronome_val.value(), 490, 465); 
+    text('STATUS:  ', 460, 515);
+    
+    textSize(11);
+    text('(Say "go" to start)', 545, 530);
+    text('(Say "stop" to stop)', 545, 545);
+    
     
     textSize(16);
-    text('METRONOME: ', 718, 525);  
-    
-    textSize(10);
-    text('(Say "go" to start)', 720, 540);
-    text('(Say "stop" to stop)', 720, 550);
-    
-    textSize(14);
-    text('STATUS: ', 845, 550);
-    
-    textSize(12);
     if(spoken_word === "go" || spoken_word === "no"){
         push();
             fill(0, 255, 0);
-            text('ACTIVE', 910, 550);
+            text('ACTIVE', 545, 515);
         pop();
     }else{
          push();
             fill(200, 0, 0);       
-            text('INACTIVE', 910, 550);
+            text('INACTIVE', 545, 515);
         pop();
     }
     
+    ////////////////////////////////
+    
+    if (keyboard_checkbox.checked()){
+        push();
+        textSize(11);
+            fill(0);
+            text('(a)', 325, 253); 
+            text('(s)', 383, 253); 
+            text('(d)', 440, 253); 
+            text('(f)', 505, 253); 
+            text('(g)', 563, 253); 
+            text('(h)', 622, 253); 
+            text('(j)', 683, 253); 
+            text('(k)', 743, 253); 
+        
+            text('(w)', 350, 93); 
+            text('(e)', 412, 93); 
+        
+            text('(t)', 532, 93); 
+            text('(y)', 590, 93);
+            text('(u)', 650, 93); 
+        pop();      
+    }
+    ///////////////////////////////
     
     push();
     fill(255);
