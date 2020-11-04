@@ -385,7 +385,10 @@ function draw() {
     
     
 //    print("release val " + synth_tone.envelope.release);
-    synth_tone.envelope.release = 2;
+    synth_tone.envelope.attack = attack.value();
+    synth_tone.envelope.decay = decay.value();
+    synth_tone.envelope.sustain = sustain.value();
+    synth_tone.envelope.release = release.value();
 //    print("release val2 " + synth_tone.envelope.release);
 }
 
