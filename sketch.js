@@ -1,11 +1,4 @@
 //Reference: https://editor.p5js.org/ml5/sketches/SoundClassification_speechcommand
-
-      //attach a click listener to a play button
-//document.querySelector('button')?.addEventListener('click', async () => {
-//	await Tone.start()
-//	console.log('audio is ready')
-//})
-
 const options = { probabilityThreshold: 0.8 };
 
 
@@ -18,6 +11,7 @@ let gain_synth_val = 10;
 //https://tonejs.github.io/docs/14.7.58/PingPongDelay.html
 const synth_pingPong = new Tone.PingPongDelay("4n", 0.2).toDestination();
 
+
 //ADSR - https://tonejs.github.io/docs/14.7.58/AmplitudeEnvelope
 //const ampEnv = new Tone.AmplitudeEnvelope({
 //		attack: 1,
@@ -25,6 +19,7 @@ const synth_pingPong = new Tone.PingPongDelay("4n", 0.2).toDestination();
 //		sustain: 1.0,
 //		release: 8
 //	}).toDestination();
+
 
 const synth_reverb = new Tone.Reverb({wet: 1, decay  : 1.5 ,preDelay  : 0.01}).toDestination();
 
@@ -85,16 +80,14 @@ function setup() {
     createCanvas(1080, 600);
     textSize(15);
     textFont('Gotham Bold');
-    
-//    frameRate(1);
 
-    //background(255);
+    
     Tone.start();
     ADSR();
     create_piano();
     
     
-    //looping metronome
+    ////////// looping metronome ////////
     //https://tonejs.github.io/docs/14.7.58/Loop
 //    loop_metro = new Tone.Loop((time) => {
 //	console.log(time);
@@ -144,7 +137,6 @@ function setup() {
     
     //piano keyboard values:
     keyboard_checkbox = createCheckbox('KEYBOARD SHORTCUT', false);
-//    keyboard_checkbox.changed(show_keyboard);
     keyboard_checkbox.position(450, 280);
     
     //gain slider
@@ -162,7 +154,7 @@ function setup() {
     
     
         loop_metro_80 = new Tone.Loop((time) => {
-        console.log(time);
+//        console.log(time);
         metro_tone.triggerAttack("C5","1");
         metro_tone.triggerRelease();
         }, "4n" );
@@ -175,23 +167,6 @@ function setup() {
 
         
 }
-
-
-//function show_keyboard(){
-//    if (keyboard_checkbox.checked()){
-//        push();
-//            fill(0);
-//            text('(a)', 790, 215); 
-//        
-//        pop();
-//        
-//        
-//        
-//    }else{
-//        fill(255);
-//    }
-//}
-
 
 
 function metro(bpm_val){
@@ -310,7 +285,7 @@ function draw() {
     textSize(14);
     text(gain_val.value() + ' dB', 785, 470); 
     
-    //METRONOME text //////////
+    ////////METRONOME text //////////
     textSize(16);
     text('METRONOME: ', 415, 415);  
     text('BPM:   '+metronome_val.value(), 490, 465); 
@@ -395,12 +370,12 @@ function draw() {
         synth_tone.chain(synth_reverb, Tone.Destination);
         
 //        synth_reverb.start();
-        print("reverb")
+//        print("reverb")
     }
     if (radio_ping_pong_delay.value() === 'PING PONG DELAY'){
 //        synth_pingPong.wet.value = 1;
         synth_tone.chain(synth_pingPong, Tone.Destination);
-        print("ping pong")
+//        print("ping pong")
     }
     else{
         synth_pingPong.disconnect();
@@ -409,9 +384,9 @@ function draw() {
     
     
     
-    print("release val " + synth_tone.envelope.release);
+//    print("release val " + synth_tone.envelope.release);
     synth_tone.envelope.release = 2;
-    print("release val2 " + synth_tone.envelope.release);
+//    print("release val2 " + synth_tone.envelope.release);
 }
 
 

@@ -4,7 +4,8 @@ let sustain;
 let release;
 
 
-//ADSR ranges https://sound.stackexchange.com/questions/27798/what-time-range-is-used-for-adsr-envelopes
+//ADSR ranges from this : https://sound.stackexchange.com/questions/27798/what-time-range-is-used-for-adsr-envelopes
+
 function ADSR() {
   attack = createSlider(0, 9, 0.05, 0.05);
   attack.id("attack-slider")
