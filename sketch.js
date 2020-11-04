@@ -339,8 +339,8 @@ function draw() {
     textSize(20);
     text('ATTACK - DECAY - ', 140, 343);
     text('SUSTAIN - RELEASE', 133, 363);
-    
-    text('EFFECTS', 495, 353);
+  
+    text('METRONOME', 475, 353);
     
     text('MISC', 820, 353);
     
